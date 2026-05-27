@@ -13,7 +13,7 @@ if (!admin.apps.length) {
 module.exports = async function (req, res) {
   try {
     const message = {
-      token: 'fOMFH9MMQOKO9LZ6K-J16Z:APA91bGH2 hHjNkjZthz9AMCNgiqj2ziNszFtiL1ILTNOqo iWyUhyZbct1mEN3nErj4j-T6aljQ3sOONPYb SE1ljkYdJUwGCE3vhxxDTQcTtYBJzpvVBfn FO',
+      token: 'en5FPEPUTISW216GM8-9qb:APA91bFX9aFIXWVGV9DN064iCww-qRo38udJHQ8D8YqbqlNzF8T296PpHEgBiNMCHUakJfU2nqeldjnv2wmeFnlZu9ojHqHvMf45yZ5n0x8RqV1HEulzSIE',
       notification: {
         title: 'TEST',
         body: 'Firebase работает',
