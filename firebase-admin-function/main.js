@@ -1,69 +1,50 @@
-const admin = require('firebase-admin');
+const admin = require("firebase-admin");
 
-let firebaseApp;
+const serviceAccount = JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT
+);
 
-module.exports = async function (req, res) {
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+}
 
+module.exports = async ({ req, res, log, error }) => {
   try {
+    const body = req.bodyJson || {};
 
-    if (!firebaseApp) {
+    const token = body.token;
+    const title = body.title || "Тест";
+    const message = body.message || "Пуш работает";
 
-      const serviceAccount =
-        JSON.parse(
-          process.env
-            .FIREBASE_SERVICE_ACCOUNT
-        );
-
-      firebaseApp =
-        admin.initializeApp({
-          credential:
-            admin.credential.cert(
-              serviceAccount
-            ),
-        });
+    if (!token) {
+      return res.json({
+        success: false,
+        error: "No token provided",
+      });
     }
 
-    const body =
-      JSON.parse(req.body || '{}');
-
-    const {
+    const result = await admin.messaging().send({
       token,
-      title,
-      message,
-    } = body;
+      notification: {
+        title,
+        body: message,
+      },
+    });
 
-    const response =
-      await admin.messaging().send({
-
-        token,
-
-        notification: {
-          title,
-          body: message,
-        },
-
-        android: {
-          priority: 'high',
-
-          notification: {
-            sound: 'default',
-            channelId: 'default',
-          },
-        },
-      });
+    log(result);
 
     return res.json({
       success: true,
-      response,
+      result,
     });
-
-  } catch (error) {
-
-    console.error(error);
+  } catch (e) {
+    error(e);
 
     return res.json({
       success: false,
-      error: error.message,
+      error: e.message,
     });
   }
 };

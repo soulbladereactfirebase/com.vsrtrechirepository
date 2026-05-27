@@ -1,5 +1,5 @@
 {
-  "name": "firebase-admin",
+  "name": "firebase-admin-function",
   "version": "1.0.0",
   "main": "src/main.js",
   "dependencies": {
