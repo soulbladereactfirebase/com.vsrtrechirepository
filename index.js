@@ -1,23 +1,22 @@
+const sdk = require('node-appwrite');
 const admin = require('firebase-admin');
 
-const serviceAccount = JSON.parse(
-  process.env.FIREBASE_SERVICE_ACCOUNT
-);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  });
-}
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 module.exports = async function (req, res) {
   try {
+    const token = 'en5FPEPUTISW216GM8-9qb:APA91bFX9aF IXWVGV9DN064iCww-qRo38udJHQ8D8Yq bqlNzF8T296PpHEgBiNMCHUakJfU2nqeld jnv2wmeFnlZu9ojHqHvMf45yZ5n0x8RqV1 HEulzSIE';
+
     const message = {
-      token: 'en5FPEPUTISW216GM8-9qb:APA91bFX9aFIXWVGV9DN064iCww-qRo38udJHQ8D8YqbqlNzF8T296PpHEgBiNMCHUakJfU2nqeldjnv2wmeFnlZu9ojHqHvMf45yZ5n0x8RqV1HEulzSIE',
       notification: {
-        title: 'TEST',
+        title: 'Тест',
         body: 'Firebase работает',
       },
+      token: token,
     };
 
     const response = await admin.messaging().send(message);
@@ -26,10 +25,10 @@ module.exports = async function (req, res) {
       success: true,
       response,
     });
-  } catch (err) {
+  } catch (error) {
     return res.json({
       success: false,
-      error: err.message,
+      error: error.message,
     });
   }
 };
