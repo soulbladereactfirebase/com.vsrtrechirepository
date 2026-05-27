@@ -15,7 +15,7 @@ module.exports = async function (req, res) {
         title: 'Тест',
         body: 'Firebase работает',
       },
-      token: 'en5FPEPUTISW216GM8-9qb:APA91bFX9aF IXWVGV9DN064iCww-qRo38udJHQ8D8Yq bqlNzF8T296PpHEgBiNMCHUakJfU2nqeld jnv2wmeFnlZu9ojHqHvMf45yZ5n0x8RqV1 HEulzSIE',
+      token: 'en5FPEPUTISW216GM8-9qb:APA91bFX9aFIXWVGV9DN064iCww-qRo38udJHQ8D8YqbqlNzF8T296PpHEgBiNMCHUakJfU2nqeldjnv2wmeFnlZu9ojHqHvMf45yZ5n0x8RqV1HEulzSIE',
     };
 
     const response = await admin.messaging().send(message);
